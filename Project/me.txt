@@ -1,0 +1,27 @@
+{
+
+read -p "Please Enter User Name : " VarUser
+
+CheckUser=$(grep -w ^$VarUser project.txt)
+
+if [[ -z $CheckUser ]]
+        then
+        read -p "Please Enter Your Password : " VarPass
+UserID=$(tail -1 project.txt | cut -d: -f3)
+
+if [[ -z $UserID  ]]
+        then
+        x=1000
+        echo $VarUser":"$VarPass":"$x >> project.txt
+else
+        x=$(($UserID+1))
+        echo $VarUser":"$VarPass":"$x >> project.txt
+fi
+else
+        echo "This user already exist"
+        echo "Please enter Another User Name"
+        echo " "
+fi
+
+}
+
